@@ -1,0 +1,359 @@
+/* Estilo geral do corpo */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(10, 7, 67, 1.00);
+    font-family: 'Bungee', cursive;
+}
+
+/* Estilo do logo */
+#logo {
+    width: 700px;
+}
+
+/* Estilo do título */
+h2 {
+    margin: -30px auto 5px auto;
+    color: rgb(246, 184, 30);
+    font-size: 28px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-shadow: 1.5px 1.5px 0 rgba(239, 0, 0, 1.00);
+}
+
+/* Estilo do texto do computador */
+#computer {
+    margin-bottom: 35px;
+    color: rgb(246, 184, 30);
+    font-size: 20px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(239, 0, 0, 1.00);
+}
+
+/* Estilo do texto móvel */
+#mobile {
+    display: none;
+}
+
+/* Estilo da tecla */
+kbd {
+    font-size: 25px;
+    padding: 5px;
+}
+
+/* Estilo do botão de jogar */
+#play {
+    position: absolute;
+    margin-top: 80px;
+    padding: 15px 25px;
+    color: rgba(10, 7, 67, 1.00);
+    font-family: 'Bungee', cursive;
+    font-size: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: rgb(246, 184, 30);
+    border: 2px solid rgba(239, 0, 0, 1.00);
+    z-index: 100;
+    cursor: pointer;
+}
+
+/* Estilo da grade do jogo */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(28, 28px); /* Ajuste conforme necessário */
+    gap: 1px; /* Espaçamento entre os blocos */
+    width: 100%;
+    height: 600px;
+    margin: 80px auto; /* Margem superior de 80px e auto para centralizar horizontalmente */
+    max-width: 600px; /* Limite para não estourar a tela */
+}
+
+/* Estilo dos blocos da grade */
+.grid div {
+    width: 20px;
+    height: 20px;
+}
+
+/* Estilo dos pontos do Pac-Man */
+.pac-dot {
+    background-color: rgba(247, 191, 80, 1.00);
+    border: 7px solid rgba(10, 7, 67, 1.00);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* Estilo das paredes */
+.wall {
+    background-color: darkblue;
+}
+
+/* Estilo do power pellet */
+.power-pellet {
+    content: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDU2IDU2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1NiA1NjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6I0M2MkE2QTsiIGQ9Ik00Ny4xNTYsMzJjMS40MTYtMC45OTUsMi4zNDQtMi42MzgsMi4zNDQtNC41YzAtMi4xMzgtMS4yMjMtMy45ODctMy4wMDUtNC44OTcNCgkJYzAuMDAxLTAuMDM1LDAuMDA1LTAuMDY4LDAuMDA1LTAuMTAzYzAtMi41NzgtMS43NzYtNC43MzUtNC4xNjktNS4zMzFDNDEuNzM1LDE0Ljc3NiwzOS41NzgsMTMsMzcsMTMNCgkJYy0yLjQzNywwLTQuNSwxLjU4Ni01LjIyMiwzLjc4MkMzMC44MzEsMTUuMTIyLDI5LjA0OCwxNCwyNywxNGMtMS44NjIsMC0zLjUwNSwwLjkyOC00LjUsMi4zNDRDMjEuNTA1LDE0LjkyOCwxOS44NjIsMTQsMTgsMTQNCgkJYy0yLjE3LDAtNC4wNDEsMS4yNi00LjkzNiwzLjA4NUMxMC40NzMsMTcuNTMsOC41LDE5Ljc4Miw4LjUsMjIuNWMwLDAuNTUsMC4wODMsMS4wODEsMC4yMzQsMS41ODINCgkJQzcuMzgxLDI1LjA4NCw2LjUsMjYuNjg3LDYuNSwyOC41YzAsMS44MzksMC45MDYsMy40NjMsMi4yOTIsNC40NjFDNy45ODcsMzMuOTE4LDcuNSwzNS4xNTIsNy41LDM2LjUNCgkJYzAsMi43NDQsMi4wMTIsNS4wMTMsNC42NDEsNS40MjZDMTEuNzMzLDQyLjY5NCwxMS41LDQzLjU3LDExLjUsNDQuNWMwLDIuNTc4LDEuNzc2LDQuNzM1LDQuMTY5LDUuMzMxDQoJCUMxNi4yNjUsNTIuMjI0LDE4LjQyMiw1NCwyMSw1NGMxLjE1OSwwLDIuMjMyLTAuMzYsMy4xMTktMC45NzJDMjUuMDM0LDU0Ljc5MiwyNi44NzUsNTYsMjksNTZjMS45NDcsMCwzLjY1NC0xLjAxNSw0LjYzMi0yLjU0Mg0KCQlDMzQuMzUsNTMuODAyLDM1LjE1MSw1NCwzNiw1NGMyLjg3NywwLDUuMjM0LTIuMjEsNS40NzYtNS4wMjRDNDQuMjksNDguNzM0LDQ2LjUsNDYuMzc3LDQ2LjUsNDMuNWMwLTAuNjgyLTAuMTMtMS4zMzEtMC4zNTYtMS45MzQNCgkJYzEuOTcyLTAuODM2LDMuMzU2LTIuNzg5LDMuMzU2LTUuMDY2QzQ5LjUsMzQuNjM4LDQ4LjU3MiwzMi45OTUsNDcuMTU2LDMyeiIvPg0KCTxnPg0KCQk8cGF0aCBzdHlsZT0iZmlsbDojNjU5QzM1OyIgZD0iTTI2Ljk3NiwwYzAsMCwwLjA0MywwLjAxNiwwLjEwNiwwLjA0MUMyNy4xNDQsMC4wMTYsMjcuMTg3LDAsMjcuMTg3LDBIMjYuOTc2eiIvPg0KCQk8cGF0aCBzdHlsZT0iZmlsbDojNjU5QzM1OyIgZD0iTTEzLjYwNSwxNi4yMjFDMTQuNjA3LDE0Ljg3OSwxNi4xOTYsMTQsMTgsMTRjMS44NjIsMCwzLjUwNSwwLjkyOCw0LjUsMi4zNDQNCgkJCUMyMy40OTUsMTQuOTI4LDI1LjEzOCwxNCwyNywxNGMyLjA0OCwwLDMuODMxLDEuMTIyLDQuNzc4LDIuNzgyQzMyLjUsMTQuNTg2LDM0LjU2MywxMywzNywxM2MxLjkyOSwwLDMuNjIxLDAuOTk1LDQuNjAxLDIuNDk4DQoJCQljMi4zMjQtMS43MjQsNC4wNS0zLjkwNSw0Ljg5OS02LjQ5OGMtOS45MjUtMy4zNzUtMTMuMDE2LDEtMTMuMDE2LDFjLTAuNjAxLTcuMzk0LTUuNjQxLTkuNjU4LTYuNDAyLTkuOTU5DQoJCQlDMjYuMzE5LDAuMzQyLDIxLjI4LDIuNjA2LDIwLjY3OSwxMGMwLDAtMy4wOTEtNC4zNzUtMTMuMDE2LTFDOC42MzUsMTEuOTY5LDEwLjc1LDE0LjQwMiwxMy42MDUsMTYuMjIxeiIvPg0KCTwvZz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRTUzMzg0OyIgZD0iTTE2LjM1NywyOC45OTdjLTEuMjQzLDAtMi41MzUtMC40NjEtMy41OTMtMS42MWMtMC4zNzQtMC40MDYtMC4zNDgtMS4wMzksMC4wNTktMS40MTMNCgkJYzAuNDA2LTAuMzc1LDEuMDM5LTAuMzQ4LDEuNDEzLDAuMDU5YzEuMjA2LDEuMzA5LDIuNzk4LDEuMDg5LDMuNzk2LDAuNTAyYzAuOTkyLTAuNTg0LDEuOTU0LTEuODY0LDEuMzk2LTMuNTQ4DQoJCWMtMC4xNzQtMC41MjQsMC4xMTEtMS4wOSwwLjYzNS0xLjI2M2MwLjUyNS0wLjE3MywxLjA5LDAuMTExLDEuMjYzLDAuNjM1YzAuODcyLDIuNjM1LTAuNTE3LDQuODYyLTIuMjgxLDUuOQ0KCQlDMTguMjcsMjguNzE1LDE3LjMyOSwyOC45OTcsMTYuMzU3LDI4Ljk5N3oiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRTUzMzg0OyIgZD0iTTM3LjI2NCw0MS4zMjVjLTEuMjQzLDAtMi41MzUtMC40NjEtMy41OTMtMS42MWMtMC4zNzQtMC40MDYtMC4zNDgtMS4wMzksMC4wNTktMS40MTMNCgkJYzAuNDA3LTAuMzc1LDEuMDM5LTAuMzQ4LDEuNDEzLDAuMDU5YzEuMjA2LDEuMzA5LDIuNzk5LDEuMDg4LDMuNzk2LDAuNTAyYzAuOTkyLTAuNTg0LDEuOTU0LTEuODY0LDEuMzk2LTMuNTQ4DQoJCWMtMC4xNzQtMC41MjQsMC4xMTEtMS4wOSwwLjYzNS0xLjI2M2MwLjUyNC0wLjE3NSwxLjA5LDAuMTExLDEuMjYzLDAuNjM1YzAuODcyLDIuNjM1LTAuNTE3LDQuODYyLTIuMjgxLDUuOQ0KCQlDMzkuMTc3LDQxLjA0MywzOC4yMzYsNDEuMzI1LDM3LjI2NCw0MS4zMjV6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6I0U1MzM4NDsiIGQ9Ik0yMC42OTgsNDEuOTk4Yy0wLjIyNywwLTAuNDUtMC4wMTQtMC42NjktMC4wNDJjLTIuMDM3LTAuMjU5LTQuMTk4LTEuNzYyLTQuNDM2LTQuNTM0DQoJCWMtMC4wNDctMC41NSwwLjM2LTEuMDM1LDAuOTExLTEuMDgyYzAuNTQ5LTAuMDQ4LDEuMDM1LDAuMzYsMS4wODIsMC45MTFjMC4xNTIsMS43NzQsMS41NDcsMi41NzQsMi42OTYsMi43MjENCgkJYzEuMTQyLDAuMTQxLDIuNjg2LTAuMjc5LDMuMjc2LTEuOTUyYzAuMTgzLTAuNTIxLDAuNzU2LTAuNzk2LDEuMjc1LTAuNjFjMC41MjEsMC4xODQsMC43OTQsMC43NTQsMC42MSwxLjI3NQ0KCQlDMjQuNjIsNDEuMDIxLDIyLjU3MSw0MS45OTgsMjAuNjk4LDQxLjk5OHoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRTUzMzg0OyIgZD0iTTI5LjY5OCwzMi42NjFjLTAuMjI3LDAtMC40NS0wLjAxNC0wLjY2OS0wLjA0MmMtMi4wMzYtMC4yNi00LjE5Ny0xLjc2Mi00LjQzNS00LjUzNA0KCQljLTAuMDQ3LTAuNTUsMC4zNi0xLjAzNSwwLjkxMS0xLjA4MmMwLjU0OC0wLjA0NywxLjAzNSwwLjM2LDEuMDgyLDAuOTExYzAuMTUyLDEuNzc0LDEuNTQ3LDIuNTc0LDIuNjk2LDIuNzINCgkJYzEuMTQyLDAuMTQ3LDIuNjg2LTAuMjc4LDMuMjc2LTEuOTUyYzAuMTgzLTAuNTIxLDAuNzU2LTAuNzk2LDEuMjc1LTAuNjFjMC41MjEsMC4xODQsMC43OTQsMC43NTQsMC42MSwxLjI3NQ0KCQlDMzMuNjIsMzEuNjg0LDMxLjU3MSwzMi42NjEsMjkuNjk4LDMyLjY2MXoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRTUzMzg0OyIgZD0iTTI4LjQ2MSw1MC4xNjljLTEuMzAzLDAtMi42NTctMC41LTMuNzIyLTEuNzUxYy0wLjM1OC0wLjQyLTAuMzA4LTEuMDUyLDAuMTEzLTEuNDENCgkJYzAuNDE5LTAuMzU4LDEuMDUyLTAuMzA4LDEuNDEsMC4xMTNjMS4xNTUsMS4zNTYsMi43NTUsMS4xOTUsMy43NzQsMC42NDhjMS4wMTQtMC41NDUsMi4wMjQtMS43ODcsMS41MzItMy40OTINCgkJYy0wLjE1My0wLjUzMSwwLjE1My0xLjA4NSwwLjY4NC0xLjIzOGMwLjUzMS0wLjE1MywxLjA4NSwwLjE1MywxLjIzOCwwLjY4NGMwLjc3LDIuNjY3LTAuNzA0LDQuODM5LTIuNTA3LDUuODA4DQoJCUMzMC4yNDMsNDkuOTI4LDI5LjM2NCw1MC4xNjksMjguNDYxLDUwLjE2OXoiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojRTUzMzg0OyIgZD0iTTQwLjYzMywyNi45OTZjLTAuOTU4LDAtMS44ODYtMC4yNzQtMi42NTMtMC43MmMtMS43NzYtMS4wMy0zLjE4NC0zLjI1NC0yLjMyNi01LjkNCgkJYzAuMTY5LTAuNTI1LDAuNzM2LTAuODEzLDEuMjU5LTAuNjQzYzAuNTI1LDAuMTcsMC44MTMsMC43MzQsMC42NDMsMS4yNTljLTAuNTQ5LDEuNjk0LDAuNDI2LDIuOTczLDEuNDI3LDMuNTU0DQoJCWMwLjk5NiwwLjU3OSwyLjU4MywwLjc4OCwzLjc3Ny0wLjUyNmMwLjM3Mi0wLjQwNywxLjAwMy0wLjQzOSwxLjQxMy0wLjA2N2MwLjQwOSwwLjM3MiwwLjQzOCwxLjAwNCwwLjA2NywxLjQxMw0KCQlDNDMuMTgyLDI2LjUyOSw0MS44ODMsMjYuOTk2LDQwLjYzMywyNi45OTZ6Ii8+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px; /* Ajuste conforme necessário */
+    height: 20px; /* Ajuste conforme necessário */
+}
+
+/* ESTILOS DOS FANTASMAS */
+
+
+.blinky{
+	content: url("https://static.wikia.nocookie.net/pacman/images/2/2e/Blinky_stock_updated_2020.png/revision/latest?cb=20221230134028");
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+.pinky{
+	content: url("https://static.wikia.nocookie.net/pacman/images/2/27/Pinky_stock_art_2020.png/revision/latest?cb=20221230134644");
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+.inky{
+	content: url("https://static.wikia.nocookie.net/pacman/images/c/cd/Inky_stock_art_2020_pacman_website.png/revision/latest?cb=20221230134403");
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+.clyde {
+	content: url("https://static.wikia.nocookie.net/pacman/images/4/43/Clyde_stock_art_2020.png/revision/latest?cb=20221230134635"); 
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+.sue {
+	content: url("https://static.wikia.nocookie.net/pacman/images/b/bd/Pac-Land_Sue_Restoration.png/revision/latest?cb=20240908025246"); 
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+.funky {
+	content: url("https://static.wikia.nocookie.net/pacman/images/1/1b/Funky.png/revision/latest?cb=20181212004843"); 
+	border: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    transform: rotate(0deg) !important;
+}
+
+/* Estilo do fantasma assustado */
+.scared-ghost {
+    content: url("https://static.wikia.nocookie.net/pacman/images/8/8b/Betrayus1.png/revision/latest?cb=20190923031232");
+	border: 0;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+/* Estilo do Pac-Man */
+.pac-man {
+    background-color: yellow;
+    border-radius: 10px;
+    border: none;
+    transform: rotate(115deg);
+}
+
+/* Estilo das partes do Pac-Man */
+.pac-man::before, .pac-man::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+}
+
+/* Estilo do "bico" do Pac-Man */
+.pac-man::before {
+    border-radius: 50px 0 0 0;
+    background-color: rgba(10, 7, 67, 1.00);
+    border-color: rgba(10, 7, 67, 1.00);
+}
+
+/* Estilo do "corpo" do Pac-Man */
+.pac-man::after {
+    border-radius: 50px 0 0 0;
+    background-color: yellow;
+    transform-origin: bottom right;
+    -webkit-transform: rotate(-90deg);
+	background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjEuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMjkuMTA3IDI5LjEwNyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjkuMTA3IDI5LjEwNzsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9ImMxNDdfZnVsbF9tb29uIj4NCgkJPGc+DQoJCQk8cGF0aCBkPSJNMTQuNTU0LDBDNi41NjEsMCwwLDYuNTYyLDAsMTQuNTUyYzAsNy45OTYsNi41NjEsMTQuNTU1LDE0LjU1NCwxNC41NTVjNy45OTYsMCwxNC41NTMtNi41NTksMTQuNTUzLTE0LjU1NQ0KCQkJCUMyOS4xMDYsNi41NjIsMjIuNTUsMCwxNC41NTQsMHoiLz4NCgkJPC9nPg0KCTwvZz4NCgk8ZyBpZD0iQ2FwYV8xXzE0XyI+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=");
+    transform: rotate(-90deg);
+    -webkit-animation: eat .5s infinite;
+    animation: eat .5s infinite;
+}
+
+/* Animação de comer do Pac-Man */
+@-webkit-keyframes eat {
+    0% {
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+    25% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    50% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    75% {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    100% {
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+}
+
+@keyframes eat {
+    0% {
+        transform: rotate(-90deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-90deg);
+    }
+}
+
+/* Estilos para game over e vitória */
+.gameOver, .won {
+    position: absolute;
+    margin-top: 80px;
+    width: 396px;
+    height: 100px;
+    border: 2px solid rgba(239, 0, 0, 1.00);
+    text-shadow: 1px 1px 0 rgba(239, 0, 0, 1.00);
+    background-color: rgb(246, 184, 30);
+    color: rgba(10, 7, 67, 1.00);
+    font-size: 40px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+/* Texto de Game Over */
+.gameOver::after {
+    content: "GAME OVER";
+    position: absolute;
+}
+
+/* Texto de Vitória */
+.won::after {
+    content: "YOU WON !";
+    position: absolute;
+}
+
+/* Estilo do botão de reiniciar */
+.restart {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    margin-top: 100px;
+    background-color: rgba(10, 7, 67, 1.00);
+    border: 2px solid rgba(239, 0, 0, 1.00);
+    border-radius: 5px;
+    z-index: 200;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bungee', cursive;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    color: rgb(246, 184, 30);
+    text-shadow: 1px 1px 0 rgba(239, 0, 0, 1.00);
+    transition: transform 0.2s ease;
+}
+
+/* Efeito de hover no botão de reiniciar */
+.restart:hover {
+    transform: scale(1.1);
+}
+
+/* Texto do botão de reiniciar */
+.restart::after {
+    content: "RESTART";
+    position: absolute;
+}
+
+/* Estilo do rodapé */
+footer {
+    color: rgba(175, 255, 228, 1.00);
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 30px;
+    z-index: -2;
+}
+
+/* RESPONSIVO */
+
+/* Estilos para telas pequenas */
+@media screen and (max-width: 1024px) {
+    #computer {
+        color: transparent;
+        text-shadow: none;
+    }
+    
+    #mobile {
+        display: block;
+        margin: -20px auto -5px auto;
+        color: rgb(246, 184, 30);
+        font-size: 20px;
+        font-weight: lighter;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 0 rgba(239, 0, 0, 1.00);
+    }
+}
+
+/* Estilos para dispositivos muito pequenos */
+@media screen and (max-width: 670px) {
+    body {
+        margin: 0;
+    }
+
+    #logo {
+        width: 100vw;
+    }
+
+    h2 {
+        margin: -20px auto 20px auto;
+        font-size: 20px;
+    }
+
+    #computer {
+        display: none;
+    }
+
+    #mobile {
+        margin: -10px 5px -5px 5px;
+        font-size: 15px;
+    }
+
+    #play, .gameOver, .won {
+        margin-top: 13px;
+        font-size: 20px;
+    }
+
+    /* Estilo do botão de reiniciar */
+    .restart {
+        width: 30vw; /* Largura do botão de reiniciar */
+        height: 8vh; /* Altura do botão de reiniciar */
+    }
+}
